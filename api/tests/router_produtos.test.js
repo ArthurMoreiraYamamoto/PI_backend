@@ -18,7 +18,7 @@ describe('API', () => {
     expect(response.type).toBe("application/json");
   });
 
-  test('Deve retornar 200 e um array no GET /produtos', async () => {
+  test('retorna 200 e um array no GET /produtos', async () => {
     const response = await request.get('/produtos');
     expect(response.status).toBe(200);
     expect(response.type).toBe('application/json');
