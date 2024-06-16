@@ -33,10 +33,10 @@ const buscarProdutoPeloId = async (req, res, next) => {
         if (produto) {
             next();
         } else {
-            res.status(404).json({ msg: 'Produto não encontrado!' })
+            res.status(404).json({ msg: 'não encontrado' })
         }
     } catch (error) {
-        res.status(400).json({ msg: 'id inválido!' });
+        res.status(400).json({ msg: 'inválido' });
     };
 };
 
