@@ -25,3 +25,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cliente'
+    get:
+      tags:
+        - clientes
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfClientes'
+  /clientes/{id}:
+    get:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+components:
+  schemas:
+    ArrayOfClientes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cliente'
+    Cliente:
+      type: object
+      properties:
+        nome:
+          type: string
+        telefone:
+          type: number
+        email:
+          type: string
+        endereco:
+          type: string
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
