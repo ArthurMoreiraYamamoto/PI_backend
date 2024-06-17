@@ -91,6 +91,26 @@ paths:
             appication/json:
               schema:
                 $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
 components:
   schemas:
     ArrayOfClientes:
