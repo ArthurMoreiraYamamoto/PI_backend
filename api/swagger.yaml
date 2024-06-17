@@ -58,6 +58,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Mensagem'
+    put:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
 components:
   schemas:
     ArrayOfClientes:
