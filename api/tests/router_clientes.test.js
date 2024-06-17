@@ -63,4 +63,16 @@ describe('API Loja Virtual', () => {
         expect(response.status).toBe(422);
         expect(response.type).toBe('application/json');
       });
+
+      test('Deve retornar 204 no DELETE /clientes/id', async () => {
+        const response = await request.delete(`/clientes/${id}`);
+        expect(response.status).toBe(204);
+        expect(response.type).toBe('');
+      });
+    
+      test('Deve retornar um 404 e um JSON no DELETE /clientes/id', async () => {
+        const response = await request.delete(`/clientes/${id}`);
+        expect(response.status).toBe(404);
+        expect(response.type).toBe('application/json');
+      });
 })
