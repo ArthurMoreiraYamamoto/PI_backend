@@ -16,4 +16,29 @@ const novoCliente = async (req, res) => {
     res.status(201).json(cliente)
 }
 
-module.exports = {validarDadosCliente, novoCliente}
+const obterTodosClientes = async (req, res, next) => {
+    const clientes = await Cliente.find({});
+    res.json(clientes);
+};
+
+const clientePeloId = async (req, res, next) => {
+    try {
+        const id = new mongoose.Types.ObjectId(req.params.id);
+        const cliente = await Cliente.findOne({_id: id});
+        if(cliente){
+            next();
+        } else{
+            res.status(404).json({msg: 'Cliente não encontrado!'});
+        }
+    } catch (error) {
+        res.status(400).json({msg: 'id inválido'})
+    }
+}
+
+const obterCliente = async (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const cliente = await Cliente.findOne({_id: id});
+    res.json(cliente);
+}
+
+module.exports = {validarDadosCliente, novoCliente, obterTodosClientes, clientePeloId, obterCliente}
