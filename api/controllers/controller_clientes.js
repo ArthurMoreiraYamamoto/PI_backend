@@ -47,4 +47,10 @@ const atualizarCliente = async (req,res) => {
     res.json(cliente);
 };
 
-module.exports = {validarDadosCliente, novoCliente, obterTodosClientes, clientePeloId, obterCliente, atualizarCliente}
+const removerCliente = async (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    await Cliente.findByIdAndDelete({_id: id});
+    res.status(204).end();
+};
+
+module.exports = {validarDadosCliente, novoCliente, obterTodosClientes, clientePeloId, obterCliente, atualizarCliente, removerCliente}
