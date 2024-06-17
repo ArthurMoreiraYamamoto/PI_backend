@@ -12,4 +12,6 @@ router.get('/:id', controllerClientes.clientePeloId, controllerClientes.obterCli
 
 router.put('/:id', controllerClientes.clientePeloId, controllerClientes.validarDadosCliente, controllerClientes.atualizarCliente);
 
+router.delete('/:id', controllerClientes.clientePeloId, controllerClientes.removerCliente );
+
 module.exports = router;
