@@ -46,4 +46,18 @@ const atualizarProduto = async (req, res) => {
     res.json(produto);
 };
 
-module.exports = { validarDados, novoProduto, obterTodosProdutos, obterProduto, buscarProdutoPeloId, atualizarProduto };
+const removerProduto = async (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    await Produto.findByIdAndDelete({ _id: id });
+    res.status(204).end();
+};
+
+module.exports = { 
+    validarDados, 
+    novoProduto, 
+    obterTodosProdutos, 
+    obterProduto, 
+    buscarProdutoPeloId, 
+    atualizarProduto,
+    removerProduto
+};
