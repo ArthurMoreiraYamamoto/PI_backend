@@ -55,4 +55,16 @@ describe('API', () => {
     expect(response.type).toBe("application/json");
   });
 
+  test('retorna 204 no DELETE /produtos/id', async () => {
+    const response = await request.delete(`/produtos/${id}`);
+    expect(response.status).toBe(204);
+    expect(response.type).toBe('');
+});
+
+test('retorna 404 e um JSON no DELETE /produtos/id', async () => {
+    const response = await request.delete(`/produtos/${id}`);
+    expect(response.status).toBe(404);
+    expect(response.type).toBe('application/json');
+});
+
 });
