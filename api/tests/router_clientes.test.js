@@ -41,4 +41,26 @@ describe('API Loja Virtual', () => {
         expect(response.status).toBe(404);
         expect(response.type).toBe('application/json');
       });
+
+      test('Deve retornar 200 e um JSON no PUT /clientes/id', async () => {
+        const response = await request.put(`/clientes/${id}`).send({nome: "Palito",
+                telefone: 61333444555,
+                email: "Palitodapesca@gmail.com",
+                endereco: "loja qne 6 ceilandia",
+        });
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+      });  
+    
+      test('Deve retornar 404 e um JSON no PUT /clientes/id', async () => {
+        const response = await request.put('/clientes/664901b4f1aa5565cb12f4c8');
+        expect(response.status).toBe(404);
+        expect(response.type).toBe('application/json');
+      });
+    
+      test('Deve retornar 422 e um JSON no PUT /clientes/id', async () => {
+        const response = await request.put(`/clientes/${id}`).send({});
+        expect(response.status).toBe(422);
+        expect(response.type).toBe('application/json');
+      });
 })

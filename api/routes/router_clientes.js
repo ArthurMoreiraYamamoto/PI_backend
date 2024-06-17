@@ -10,4 +10,6 @@ router.get('/', controllerClientes.obterTodosClientes );
 
 router.get('/:id', controllerClientes.clientePeloId, controllerClientes.obterCliente);
 
+router.put('/:id', controllerClientes.clientePeloId, controllerClientes.validarDadosCliente, controllerClientes.atualizarCliente);
+
 module.exports = router;
