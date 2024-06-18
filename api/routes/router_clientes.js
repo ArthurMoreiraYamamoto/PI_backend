@@ -2,11 +2,13 @@ const express = require('express');
 
 const controllerClientes = require('../controllers/controller_clientes');
 
+const validarToken = require('../middlewares/auth');
+
 const router = express.Router();
 
 router.post('/', controllerClientes.validarDadosCliente, controllerClientes.novoCliente);
 
-router.get('/', controllerClientes.obterTodosClientes );
+router.get('/', validarToken, controllerClientes.obterTodosClientes );
 
 router.get('/:id', controllerClientes.clientePeloId, controllerClientes.obterCliente);
 
