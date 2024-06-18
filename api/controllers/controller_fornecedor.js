@@ -26,6 +26,7 @@ const obterFornecedor = async (req, res) => {
     const fornecedor = await Fornecedor.findOne({ _id: id });
     res.json(fornecedor);
 };
+
 const buscarFornecedorPeloId = async (req, res, next) => {
     try {
         const id = new mongoose.Types.ObjectId(req.params.id)
@@ -40,4 +41,10 @@ const buscarFornecedorPeloId = async (req, res, next) => {
     };
 };
 
-module.exports = { validarDados, novoFornecedor, obterTodosFornecedor, obterFornecedor, buscarFornecedorPeloId }
+const atualizarFornecedor = async (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const fornecedor = await Fornecedor.findByIdAndUpdate({ _id: id }, req.body);
+    res.json(fornecedor);
+};
+
+module.exports = { validarDados, novoFornecedor, obterTodosFornecedor, obterFornecedor, buscarFornecedorPeloId, atualizarFornecedor }
