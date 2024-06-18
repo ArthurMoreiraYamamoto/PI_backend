@@ -26,4 +26,10 @@ router.put(
     controllerFornecedor.atualizarFornecedor
 );
 
+router.delete(
+    '/:id',
+    controllerFornecedor.buscarFornecedorPeloId,
+    controllerFornecedor.removerFornecedor
+);
+
 module.exports = router;

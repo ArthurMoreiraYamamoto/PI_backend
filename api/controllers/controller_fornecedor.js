@@ -47,4 +47,10 @@ const atualizarFornecedor = async (req, res) => {
     res.json(fornecedor);
 };
 
-module.exports = { validarDados, novoFornecedor, obterTodosFornecedor, obterFornecedor, buscarFornecedorPeloId, atualizarFornecedor }
+const removerFornecedor = async (req, res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    await Fornecedor.findByIdAndDelete({ _id: id });
+    res.status(204).end();
+};
+
+module.exports = { validarDados, novoFornecedor, obterTodosFornecedor, obterFornecedor, buscarFornecedorPeloId, atualizarFornecedor, removerFornecedor }
