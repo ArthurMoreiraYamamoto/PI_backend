@@ -8,4 +8,15 @@ router.post(
     controllerFornecedor.novoFornecedor
 );
 
+router.get(
+    '/',
+    controllerFornecedor.obterTodosFornecedor
+);
+
+router.get(
+    '/:id',
+    controllerFornecedor.buscarFornecedorPeloId,
+    controllerFornecedor.obterFornecedor
+);
+
 module.exports = router;
