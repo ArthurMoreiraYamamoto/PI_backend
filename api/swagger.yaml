@@ -1,12 +1,118 @@
 openapi: 3.0.0
 info:
-  title: API Fornecedores
-  version: 0.0.1
+  title: API
+  version: 0.1
 tags:
-  - name: fornecedores
-    description: Operações relacionadas aos fornecedores
+  - produtos
+  - fornecedores
 paths:
-  /fornecedor:
+  /produtos:
+    post:
+      tags:
+        - produtos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    get:
+      tags:
+        - produtos
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfProdutos'
+  /produtos/{id}:
+    get:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    put:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+/fornecedor:
     post:
       tags:
         - fornecedores
@@ -140,10 +246,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Mensagem'
+                $ref: '#/components/schemas/Mensagem'            
 components:
   schemas:
-    ArrayOfFornecedores:
+    ArrayOfProdutos:
+      type: array
+      items:
+        $ref: '#/components/schemas/Produto'
+    Produto:
+      type: object
+      properties:
+        nome:
+          type: string
+        preco:
+          type: number
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
+ArrayOfFornecedores:
       type: array
       items:
         $ref: '#/components/schemas/Fornecedor'
@@ -162,9 +284,4 @@ components:
       required:
         - nome
         - cnpj
-    Mensagem:
-      type: object
-      properties:
-        msg:
-          type: string
-          description: Mensagem de erro ou status
+           
