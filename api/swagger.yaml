@@ -25,6 +25,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cliente'
+      security:
+        - JWTAuth: []
     get:
       tags:
         - clientes
@@ -49,17 +51,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Cliente'
+                $ref: '#/components/schemas/Cliente'
         400:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []
     put:
       tags:
         - clientes
@@ -82,17 +86,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'        
+                $ref: '#/components/schemas/Mensagem'        
         422:
           content:
             appication/json:
               schema:
                 $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []  
     delete:
       tags:
         - clientes
@@ -107,12 +113,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []
 components:
   securitySchemes:
     JWTAuth:

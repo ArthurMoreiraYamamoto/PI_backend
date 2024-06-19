@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 const routerApiDocs = require('./routes/apidocs');
 const routerClientes = require('./routes/router_clientes')
+var usersRouter = require('./routes/user_routes');
 
 var app = express();
 
@@ -18,5 +19,6 @@ app.use(cookieParser());
 
 app.use('/api-docs', routerApiDocs);
 app.use('/clientes', routerClientes);
+app.use('/users', usersRouter);
 
 module.exports = app;
