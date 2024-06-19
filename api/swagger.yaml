@@ -3,6 +3,8 @@ info:
   title: Api Loja Virtual
   version: 0.1
 tags:
+  - produtos
+  - fornecedores
   - clientes
 paths:
   /clientes:
@@ -121,6 +123,364 @@ paths:
                 $ref: '#/components/schemas/Mensagem'
       security:
         - JWTAuth: []
+  /clientes:
+    post:
+      tags:
+        - clientes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+      security:
+        - JWTAuth: []
+    get:
+      tags:
+        - clientes
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfClientes'
+      security:
+        - JWTAuth: []
+  /clientes/{id}:
+    get:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []
+    put:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []  
+    delete:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []    
+  /produtos:
+    post:
+      tags:
+        - produtos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    get:
+      tags:
+        - produtos
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfProdutos'
+  /produtos/{id}:
+    get:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    put:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+  /fornecedor:
+    post:
+      tags:
+        - fornecedores
+      summary: Adiciona um novo fornecedor
+      requestBody:
+        description: Dados do fornecedor a ser adicionado
+        required: true
+        content:
+            schema:
+              $ref: '#/components/schemas/Fornecedor'
+      responses:
+        201:
+          description: Fornecedor criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+        422:
+          description: Dados inválidos fornecidos para o fornecedor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    get:
+      tags:
+        - fornecedores
+      summary: Lista todos os fornecedores
+      responses:
+        200:
+          description: Lista de fornecedores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfFornecedores'
+  /fornecedor/{id}:
+    get:
+      tags:
+        - fornecedores
+      summary: Obtém os detalhes de um fornecedor específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do fornecedor
+      responses:
+        200:
+          description: Detalhes do fornecedor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+        400:
+          description: ID do fornecedor inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          description: Fornecedor não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    put:
+      tags:
+        - fornecedores
+      summary: Atualiza as informações de um fornecedor específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do fornecedor
+      requestBody:
+        description: Dados atualizados do fornecedor
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fornecedor'
+      responses:
+        200:
+          description: Fornecedor atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+        400:
+          description: ID do fornecedor inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          description: Fornecedor não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        422:
+          description: Dados inválidos fornecidos para atualização
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - fornecedores
+      summary: Exclui um fornecedor específico
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID do fornecedor
+      responses:
+        204:
+          description: Fornecedor excluído com sucesso
+        400:
+          description: ID do fornecedor inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          description: Fornecedor não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'            
+        
 components:
   securitySchemes:
     JWTAuth:
@@ -148,3 +508,58 @@ components:
       properties:
         msg:
           type: string
+    ArrayOfClientes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cliente'
+    Cliente:
+      type: object
+      properties:
+        nome:
+          type: string
+        telefone:
+          type: number
+        email:
+          type: string
+        endereco:
+          type: string
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
+    ArrayOfProdutos:
+      type: array
+      items:
+        $ref: '#/components/schemas/Produto'
+    Produto:
+      type: object
+      properties:
+        nome:
+          type: string
+        preco:
+          type: number
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
+    ArrayOfFornecedores:
+      type: array
+      items:
+        $ref: '#/components/schemas/Fornecedor'
+    Fornecedor:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID do fornecedor
+        nome:
+          type: string
+          description: Nome do fornecedor
+        cnpj:
+          type: string
+          description: CNPJ do fornecedor
+      required:
+        - nome
+        - cnpj
