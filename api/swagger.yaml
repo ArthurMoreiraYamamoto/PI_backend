@@ -1,11 +1,244 @@
 openapi: 3.0.0
 info:
-  title: API
+  title: Api Loja Virtual
   version: 0.1
 tags:
   - produtos
   - fornecedores
+  - clientes
 paths:
+  /clientes:
+    post:
+      tags:
+        - clientes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+      security:
+        - JWTAuth: []
+    get:
+      tags:
+        - clientes
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfClientes'
+      security:
+        - JWTAuth: []
+  /clientes/{id}:
+    get:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []
+    put:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []  
+    delete:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []
+  /clientes:
+    post:
+      tags:
+        - clientes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+      security:
+        - JWTAuth: []
+    get:
+      tags:
+        - clientes
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfClientes'
+      security:
+        - JWTAuth: []
+  /clientes/{id}:
+    get:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []
+    put:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []  
+    delete:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+      security:
+        - JWTAuth: []    
   /produtos:
     post:
       tags:
@@ -112,7 +345,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Mensagem'
-/fornecedor:
+  /fornecedor:
     post:
       tags:
         - fornecedores
@@ -247,8 +480,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Mensagem'            
+        
 components:
+  securitySchemes:
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: Authorization
   schemas:
+    ArrayOfClientes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cliente'
+    Cliente:
+      type: object
+      properties:
+        nome:
+          type: string
+        telefone:
+          type: number
+        email:
+          type: string
+        endereco:
+          type: string
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
+    ArrayOfClientes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cliente'
+    Cliente:
+      type: object
+      properties:
+        nome:
+          type: string
+        telefone:
+          type: number
+        email:
+          type: string
+        endereco:
+          type: string
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
     ArrayOfProdutos:
       type: array
       items:
@@ -265,7 +544,7 @@ components:
       properties:
         msg:
           type: string
-ArrayOfFornecedores:
+    ArrayOfFornecedores:
       type: array
       items:
         $ref: '#/components/schemas/Fornecedor'
@@ -284,4 +563,3 @@ ArrayOfFornecedores:
       required:
         - nome
         - cnpj
-           
